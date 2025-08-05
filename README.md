@@ -5,6 +5,8 @@
 
 A comprehensive Node-RED package that provides static code analysis, performance monitoring, queue monitoring, and IDE-like development helpers to enhance your Node-RED development experience with intelligent debugging and observability features.
 
+🚀 Inspired by work by [KIKO](https://github.com/KIKOmanasijev)
+
 ## Features
 
 - **🔍 Static Code Analysis**: Detects debugging artifacts, code quality issues, and potential problems in function nodes
