@@ -1,0 +1,45 @@
+<!-- Analyzer Button Script -->
+<script type="text/javascript">
+    // Add Analyzer button to Node-RED header
+    (function() {
+        function addAnalyzerButton() {
+            // Check if button already exists
+            if (document.getElementById('red-ui-header-button-analyzer')) {
+                return;
+            }
+            
+            const deployButton = document.getElementById('red-ui-header-button-deploy');
+            if (deployButton && deployButton.parentElement) {
+                // Create the analyzer button
+                const analyzerButton = document.createElement('a');
+                analyzerButton.id = 'red-ui-header-button-analyzer';
+                analyzerButton.className = 'button';
+                analyzerButton.href = '/analyzer';
+                analyzerButton.target = '_blank';
+                analyzerButton.style.paddingTop = '0';
+                analyzerButton.style.paddingBottom = '0';
+                analyzerButton.style.width = '30px';
+                analyzerButton.style.height = '30px';
+                analyzerButton.style.display = 'inline-flex';
+                analyzerButton.style.alignItems = 'center';
+                analyzerButton.style.justifyContent = 'center';
+                analyzerButton.innerHTML = '<img src="/analyzer/assets/node-red-analyzer.svg" style="width:30px;height:30px;" alt="Analyzer">';
+                
+                // Insert before the deploy button
+                deployButton.parentElement.insertBefore(analyzerButton, deployButton);
+            } else {
+                // If deploy button not found yet, try again
+                setTimeout(addAnalyzerButton, 500);
+            }
+        }
+        
+        // Try to add button when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', addAnalyzerButton);
+        } else {
+            // DOM already loaded
+            setTimeout(addAnalyzerButton, 100);
+        }
+    })();
+</script>
+
