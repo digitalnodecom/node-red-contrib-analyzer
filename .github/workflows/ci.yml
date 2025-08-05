@@ -167,8 +167,11 @@ jobs:
     - name: Install dependencies
       run: npm ci
     
-    - name: Build admin dashboard
-      run: npm run build:admin
+    - name: Build admin UI
+      working-directory: ./lib/admin
+      run: |
+        npm ci
+        npm run build
     
     - name: Create build artifact
       run: |
