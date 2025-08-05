@@ -1,4 +1,4 @@
-const { detectDebuggingTraits } = require('../../lib/detector');
+const { detectDebuggingTraits } = require('../../lib/detection/detector');
 const sampleCode = require('../fixtures/sample-code');
 
 describe('Detector - detectDebuggingTraits', () => {

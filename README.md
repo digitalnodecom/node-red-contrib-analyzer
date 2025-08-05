@@ -1,7 +1,7 @@
 # Node-RED Code Analyzer
 
-[![CI/CD Pipeline](https://github.com/your-username/node-red-contrib-code-analyzer/actions/workflows/ci.yml/badge.svg)](https://github.com/your-username/node-red-contrib-code-analyzer/actions/workflows/ci.yml)
-[![Coverage Status](https://codecov.io/gh/your-username/node-red-contrib-code-analyzer/branch/main/graph/badge.svg)](https://codecov.io/gh/your-username/node-red-contrib-code-analyzer)
+[![CI/CD Pipeline](https://github.com/digitalnodecom/node-red-contrib-analyzer/actions/workflows/ci.yml/badge.svg)](https://github.com/digitalnodecom/node-red-contrib-analyzer/actions/workflows/ci.yml)
+[![Coverage Status](https://codecov.io/gh/digitalnodecom/node-red-contrib-analyzer/branch/main/graph/badge.svg)](https://codecov.io/gh/digitalnodecom/node-red-contrib-analyzer)
 
 A comprehensive Node-RED package that provides static code analysis, performance monitoring, queue monitoring, and IDE-like development helpers to enhance your Node-RED development experience with intelligent debugging and observability features.
 
@@ -324,7 +324,7 @@ The performance monitoring feature continuously tracks your Node-RED instance's 
 ## Installation
 
 ```bash
-npm install node-red-contrib-code-analyzer
+npm install @digitalnodecom/node-red-contrib-analyzer
 ```
 
 ## Usage
@@ -344,8 +344,8 @@ npm install node-red-contrib-code-analyzer
 ### Installation
 
 ```bash
-git clone https://github.com/your-username/node-red-contrib-code-analyzer.git
-cd node-red-contrib-code-analyzer
+git clone https://github.com/digitalnodecom/node-red-contrib-analyzer.git
+cd node-red-contrib-analyzer
 npm install
 ```
 
@@ -457,6 +457,6 @@ ISC License - see the [LICENSE](LICENSE) file for details.
 
 ## Support
 
-- 📖 [Documentation](https://github.com/your-username/node-red-contrib-code-analyzer/wiki)
-- 🐛 [Issue Tracker](https://github.com/your-username/node-red-contrib-code-analyzer/issues)
-- 💬 [Discussions](https://github.com/your-username/node-red-contrib-code-analyzer/discussions)
+- 📖 [Documentation](https://github.com/digitalnodecom/node-red-contrib-analyzer/wiki)
+- 🐛 [Issue Tracker](https://github.com/digitalnodecom/node-red-contrib-analyzer/issues)
+- 💬 [Discussions](https://github.com/digitalnodecom/node-red-contrib-analyzer/discussions)

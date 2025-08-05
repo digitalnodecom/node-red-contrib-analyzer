@@ -1,0 +1,89 @@
+name: Publish to npm
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Run tests
+        run: npm test
+        
+      - name: Extract version and detect pre-release
+        run: |
+          # Extract version from tag name, handle both GITHUB_REF and GITHUB_REF_NAME
+          if [[ -n "$GITHUB_REF_NAME" ]]; then
+            VERSION=${GITHUB_REF_NAME#v}
+          else
+            VERSION=${GITHUB_REF#refs/tags/v}
+          fi
+          
+          # Debug output
+          echo "GITHUB_REF: $GITHUB_REF"
+          echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
+          echo "Extracted VERSION: $VERSION"
+          
+          # Validate version is not empty
+          if [[ -z "$VERSION" ]]; then
+            echo "Error: Could not extract version from tag"
+            exit 1
+          fi
+          
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "Publishing version: $VERSION"
+          
+          # Check if this is a pre-release (contains alpha, beta, rc, or other pre-release identifiers)
+          if [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "IS_PRERELEASE=false" >> $GITHUB_ENV
+            echo "NPM_TAG=latest" >> $GITHUB_ENV
+            echo "Detected as: Latest release"
+          else
+            echo "IS_PRERELEASE=true" >> $GITHUB_ENV
+            # Extract pre-release tag (alpha, beta, rc, etc.)
+            if [[ "$VERSION" =~ -([a-zA-Z]+) ]]; then
+              PRE_TAG=${BASH_REMATCH[1]}
+              echo "NPM_TAG=$PRE_TAG" >> $GITHUB_ENV
+              echo "Detected as: Pre-release with tag '$PRE_TAG'"
+            else
+              echo "NPM_TAG=next" >> $GITHUB_ENV
+              echo "Detected as: Pre-release with default 'next' tag"
+            fi
+          fi
+        
+      - name: Build admin dashboard
+        run: npm run build:admin
+        
+      - name: Update package.json version
+        run: npm version $VERSION --no-git-tag-version
+        
+      - name: Publish to npm
+        run: npm publish --access public --tag $NPM_TAG
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          
+      - name: Notify success
+        run: |
+          echo "✅ Successfully published @digitalnodecom/node-red-contrib-analyzer@$VERSION to npm"
+          echo "🏷️  Published with tag: $NPM_TAG"
+          if [[ "$IS_PRERELEASE" == "true" ]]; then
+            echo "⚠️  This is a pre-release version"
+            echo "📦 Install with: npm install @digitalnodecom/node-red-contrib-analyzer@$NPM_TAG"
+          else
+            echo "🚀 This is a stable release"
+            echo "📦 Install with: npm install @digitalnodecom/node-red-contrib-analyzer"
+          fi
+          echo "📦 Package URL: https://www.npmjs.com/package/@digitalnodecom/node-red-contrib-analyzer"

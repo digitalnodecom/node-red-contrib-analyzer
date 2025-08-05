@@ -1,4 +1,4 @@
-const { detectDebuggingTraitsAST, parseIgnoreDirectives, shouldIgnoreLine } = require('../../lib/ast-detector');
+const { detectDebuggingTraitsAST, parseIgnoreDirectives, shouldIgnoreLine } = require('../../lib/detection/ast-detector');
 
 describe('AST-based Detector', () => {
     describe('detectDebuggingTraitsAST', () => {
