@@ -1,5 +1,5 @@
-const { detectDebuggingTraits } = require('../../lib/detector');
-const SlackNotifier = require('../../lib/slack-notifier');
+const { detectDebuggingTraits } = require('../../lib/detection/detector');
+const SlackNotifier = require('../../lib/monitoring/slack-notifier');
 
 describe('Integration Tests - Code Analyzer End-to-End', () => {
     

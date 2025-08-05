@@ -1,4 +1,4 @@
-const PerformanceMonitor = require('../../lib/performance-monitor');
+const PerformanceMonitor = require('../../lib/monitoring/performance-monitor');
 
 // Mock os module
 jest.mock('os', () => ({
@@ -6,7 +6,7 @@ jest.mock('os', () => ({
 }));
 
 // Mock the database module
-jest.mock('../../lib/performance-db', () => {
+jest.mock('../../lib/database/performance-db', () => {
     return jest.fn().mockImplementation(() => {
         return {
             setRetentionDays: jest.fn(),

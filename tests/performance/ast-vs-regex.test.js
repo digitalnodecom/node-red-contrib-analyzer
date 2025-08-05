@@ -1,5 +1,5 @@
-const { detectDebuggingTraits } = require('../../lib/detector');
-const { detectDebuggingTraitsAST } = require('../../lib/ast-detector');
+const { detectDebuggingTraits } = require('../../lib/detection/detector');
+const { detectDebuggingTraitsAST } = require('../../lib/detection/ast-detector');
 
 describe('Performance Comparison: AST vs Regex', () => {
     const sampleCode = `

@@ -1,4 +1,4 @@
-const { detectDebuggingTraits, parseIgnoreDirectives, shouldIgnoreLine } = require('../../lib/detector');
+const { detectDebuggingTraits, parseIgnoreDirectives, shouldIgnoreLine } = require('../../lib/detection/detector');
 
 describe('Ignore Directives', () => {
     describe('parseIgnoreDirectives', () => {

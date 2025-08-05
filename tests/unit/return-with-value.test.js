@@ -1,4 +1,4 @@
-const { detectDebuggingTraits } = require('../../lib/detector');
+const { detectDebuggingTraits } = require('../../lib/detection/detector');
 
 describe('Return Statement Detection - Values vs Empty', () => {
     test('should NOT detect return statements with values', () => {

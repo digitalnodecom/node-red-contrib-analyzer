@@ -1,4 +1,4 @@
-const SlackNotifier = require('../../lib/slack-notifier');
+const SlackNotifier = require('../../lib/monitoring/slack-notifier');
 
 // Mock fetch globally
 global.fetch = jest.fn();

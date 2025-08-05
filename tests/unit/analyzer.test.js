@@ -1,7 +1,7 @@
-const { detectDebuggingTraits } = require('../../lib/detector');
+const { detectDebuggingTraits } = require('../../lib/detection/detector');
 
 // Mock the detector
-jest.mock('../../lib/detector');
+jest.mock('../../lib/detection/detector');
 
 describe('Analyzer Node', () => {
     let mockRED;
@@ -29,7 +29,8 @@ describe('Analyzer Node', () => {
             },
             httpAdmin: {
                 get: jest.fn(),
-                post: jest.fn()
+                post: jest.fn(),
+                use: jest.fn()
             }
         };
 
@@ -42,26 +43,20 @@ describe('Analyzer Node', () => {
         jest.clearAllMocks();
     });
 
-    describe('Node Registration', () => {
-        test('should register analyzer node with correct type', () => {
-            // Act
-            require('../../nodes/analyzer.js')(mockRED);
-
-            // Assert
-            expect(mockRED.nodes.registerType).toHaveBeenCalledWith('code-analyzer', expect.any(Function));
+    describe('Global Service Initialization', () => {
+        test('should initialize analyzer global service without errors', () => {
+            // Act & Assert - should not throw errors
+            expect(() => {
+                require('../../lib/analyzer.js')(mockRED);
+            }).not.toThrow();
         });
-    });
 
-    describe('Code Analysis Configuration', () => {
-        test('should have codeAnalysis configuration option', () => {
-            // This test verifies that the codeAnalysis configuration is handled
-            // The actual functionality is tested in integration tests
+        test('should setup Express routes on httpAdmin', () => {
+            // Act
+            require('../../lib/analyzer.js')(mockRED);
             
-            // Arrange & Act
-            require('../../nodes/analyzer.js')(mockRED);
-            
-            // Assert - verify the node type is registered
-            expect(mockRED.nodes.registerType).toHaveBeenCalledWith('code-analyzer', expect.any(Function));
+            // Assert - verify Express routes are configured
+            expect(mockRED.httpAdmin.use).toHaveBeenCalled();
         });
     });
 
