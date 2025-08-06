@@ -1,6 +1,6 @@
 {
   "name": "@digitalnodecom/node-red-contrib-analyzer",
-  "version": "1.0.1",
+  "version": "1.0.6",
   "description": "A Node-RED global service that monitors function nodes for debugging artifacts and performance issues. Features real-time quality metrics, Vue.js dashboard, and comprehensive code analysis.",
   "main": "lib/analyzer.js",
   "scripts": {
